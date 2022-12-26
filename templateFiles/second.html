@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Search</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <link rel="stylesheet" href="../staticFiles/main.css">
+</head>
+<body>
+    <header class="bg-[#140038] py-5">
+        <div class="headerContainer">
+            <h1 class="h-text">Voice Bassed User Indetification</h1>
+            <div class="flex justify-between items-center gap-x-2">
+                <span class="text-white font-medium">Shomtro Kumar</span>
+                <img class="w-[56px] h-[56px]" src="../staticFiles/avatar.png" alt="">
+            </div>
+        </div>
+    </header>
+
+    <main class="py-14">
+        <!-- Main Content -->
+        <div class="container mx-auto">
+            <!-- Topbar -->
+            <div class="topbar flex justify-between">
+                <h3 class="text-xl text-[#140038] font-semibold">Upload your files and Check Voice!</h3>
+                <div class="flex justify-between gap-x-2">
+                    <div class="px-3 border border-gray-200 rounded-md flex items-center">
+                        <span class="text-gray-200"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input class="text-xs text-gray-300 focus:outline-none pl-3" type="search" placeholder="NID/Phone/Name/Location">
+                    </div>
+                    <button class="bg-[#560095] rounded-md py-3 px-10 text-sm text-[#fff]">
+                        Saved Searches
+                    </button>
+                    <button class="bg-[#560095] rounded-md py-3 px-10 text-sm text-[#fff]" id="profileBtn">
+                        <i class="fa-solid fa-plus"></i> Add Profile
+                    </button>
+                </div>
+            </div>
+            <!-- Topbar End -->
+
+            <div class="flex justify-between py-4 gap-x-2">
+                <!-- File Upload -->
+                <div class="w-[50%]">
+                    <form method="POST" action="/upload" enctype="multipart/form-data">
+                        <div class="flex items-center justify-center w-full">
+                        
+                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-4 border-[#ddd] border-dashed rounded-lg cursor-pointer">
+                                <div class="flex flex-col items-center justify-center pt-1 pb-1">
+                                    <span class="text-4xl text-[#ddd]">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    </span>
+                
+                                </div>
+                                <div class="bg-[#560095] rounded-xl py-3 px-10 text-sm text-[#fff]">
+                                    <input id="dropzone-file" type="file" name="file" hidden />
+                                    <span>Browse diffrent File</span>
+                                </div>
+    
+                                <span id="file-chosen"></span>
+
+                                <input type = "submit" value = "Submit" class="submitBtn"/>
+                                
+                            </label>
+                           
+                           
+                        </div> 
+                    </form>
+                   
+                </div>
+
+                <!-- Voice Box -->
+                <div class="w-[50%]">
+                    <div class="flex items-center justify-center w-full bg-[#f8f8f8]">
+                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-[#ddd] rounded-lg cursor-pointer">
+                            <div class="flex flex-col items-center justify-center pt-1 pb-1">
+                                <button class="bg-[#560095] w-12 h-12 rounded-full flex justify-center items-center text-white ring-8 ring-gray-200">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </button>
+                                <p class="text-md py-3 font-semibold">Tap to Instant Speek</p>
+                            </div>
+                            
+                            <button class="border text-[#560095] border-[#560095] rounded-xl py-3 px-10 text-sm">
+                                Tap to Record
+                            </button>
+                            
+                        </label>
+                    </div> 
+                </div>
+            </div>
+
+
+
+            <div class="flex justify-between py-4 gap-x-2">
+                <!-- File Upload -->
+                <div class="w-[50%]">
+                    <div class="flex flex-col justify-center w-full bg-[#e4e3e4] h-64 rounded-xl px-10 py-5">
+                        <p class="text-[#140038] font-semibold text-xl py-3">Main Audio</p>
+                        <audio controls  preload="metadata" class="w-full">
+                            <source src="../staticFiles/audio/audio.mp3" type="audio/ogg">
+                            Your browser does not support the audio element.
+                        </audio>
+
+                        <div class="flex mt-5">
+                            <input type="reset" value="Clear Data" class="border text-white bg-[#560095] rounded-xl py-[.70rem] px-10 text-sm w-[28%]">
+                            <button class=" bg-[#140038] rounded-xl text-white px-4 py-1 ml-2">
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </button>
+                        </div>
+                     </div> 
+                 </div>
+
+                  <!-- Voice Box -->
+                <div class="w-[50%]">
+                    <div class="flex flex-col items-center justify-center w-full bg-[#e4e3e4] h-64 rounded-xl">
+                       <h1 class="text-[#140038] text-7xl font-extrabold py-3">01</h1>
+                       <p class="text-[#140038] text-xl py-3">Found Speakers Voice</p>
+                       <p>Predicted use: <span class="font-semibold text-green-600">Shumitro Kumar Ghosh</span></p>
+                    </div> 
+                </div>
+                   
+                </div>
+            
+        </div>
+        <!-- Main Content End -->
+
+        <!-- Profile Popup -->
+        <div class="bg-[#0000009c] w-screen absolute top-0 left-0 hidden transition-all delay-75" id="profile-card">
+            <div class="w-[60%] mx-auto rounded-t-xl bg-[#fff] shadow-md mt-20">
+                <header class="bg-[#140038] flex justify-between text-[#fff] px-8 py-3 rounded-t-xl">
+                    <h4 class="font-medium">Create New Profile</h4>
+                    <span id="closeCard" class=" cursor-pointer"><i class="fa-solid fa-xmark"></i></span>
+                </header>
+                <form action="POST">
+                    <div class="px-14 py-10 flex gap-x-5">
+                        <div class="border border-dashed h-auto max-h-[180px] border-[#f4f0f0] bg-[#f8f3f3] w-[25%] flex flex-col items-center justify-center p-5">
+                            <span class="text-4xl">
+                                <i class="fa-solid fa-plus"></i>
+                            </span>
+                            <p class="text-xs mt-10">Drag & Upload Image</p>
+                        </div>
+        
+                        <!-- Information field -->
+                        <div class="flex flex-col w-[75%] gap-y-3">
+                            <div class="flex flex-col w-full">
+                                <label for="name" class="text-sm">First Name</label>
+                                <input type="text" id="name" class="border px-3 py-3 border-[#eee] w-full block rounded-md focus:outline-none text-xs" placeholder="Shomitro">
+                            </div>
+            
+                            <div class="flex flex-col w-full">
+                                <label class="text-sm" for="address">Address</label>
+                                <textarea name="address" placeholder="Full Address" id="address" class="border px-3 py-2 border-[#eee] w-full block rounded-md focus:outline-none text-xs" cols="30" rows="3"></textarea>
+                            </div>
+        
+                            <div class="flex justify-between items-end gap-x-2">
+                                <div class="flex flex-col w-[90%]">
+                                    <label for="name" class="text-sm">Mobile Number</label>
+                                    <input type="text" id="name" class="border px-3 py-3 border-[#eee] w-full block rounded-md focus:outline-none text-xs" placeholder="+8801XXXXXXXXX">
+                                </div>
+                                
+                                <button class="bg-[#560095] rounded-md w-[10%] h-[42px] text-sm text-[#fff] inline-block">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+        
+                            <div class="flex flex-col w-full">
+                                <label for="name" class="text-sm">National ID</label>
+                                <input type="text" id="name" class="border px-3 py-3 border-[#eee] w-full block rounded-md focus:outline-none text-xs" placeholder="00000000000">
+                            </div>
+        
+                            <div>
+                                <p class="text-sm">Voice Data</p>
+                                <div class="flex w-full">
+                                    <label for="dropzone-file" class="flex flex-col justify-center w-full border-4 border-[#ddd] border-dashed rounded-lg cursor-pointer py-3">
+                                        <div class="flex items-center justify-center pt-1 pb-1">
+                                            <span class="text-4xl text-[#ddd]">
+                                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                            </span>
+                                            <div class="ml-4">
+                                                <p class="text-md py-3 font-semibold">Drag and drop audio file here or Choose from file</p>
+                                                <div class="border border-[#560095] text-[#560095] rounded-xl py-2 px-3 text-sm inline-block">
+                                                    <input id="dropzone-file" type="file" />
+                                                    <span>Browse File</span>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                    </label>
+                                </div>  
+                            </div>   
+                            
+                            <input type="submit" value="Create Profile" class="bg-[#560095] rounded-md py-3 px-10 text-sm text-[#fff] w-[200px] mx-auto mt-10">
+        
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Profile Popup End -->
+    </main>
+
+    <script src="../staticFiles/main.js"></script>
+</body>
+</html>
